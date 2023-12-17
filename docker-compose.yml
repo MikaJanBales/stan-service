@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+  db:
+    restart: always
+    image: postgres:latest
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./.database/postgres/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+  web:
+    build: ./
+    # command: ./wait-for-postgres.sh db ./stan-service
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+      - redis
+      - nats
+    environment:
+      - DB_PASSWORD=${DB_PASSWORD}
+  redis:
+    image: redis
+    ports:
+      - "8888:6379"
+  nats:
+    image: nats-streaming:0.25.4
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+      - "6222:6222"
+    restart: always
