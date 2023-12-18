@@ -21,6 +21,6 @@ go run go-service/cmd/main.go
 go run pusher/main.go
 ```
 
-3) Get data using id by handler:
+3) Get data using id by handler(use postaman https://www.postman.com/):
 
 https://localhost:8000/data/{id}
