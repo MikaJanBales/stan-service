@@ -6,17 +6,13 @@ import (
 	"github.com/rs/cors"
 )
 
-func CorsSettings(frontHost string) *cors.Cors {
+func CorsSettings() *cors.Cors {
 	c := cors.New(cors.Options{
 		AllowedMethods: []string{
 			http.MethodGet,
 			http.MethodDelete,
 			http.MethodPost,
 			http.MethodPut,
-		},
-		AllowedOrigins: []string{
-			frontHost,
-			"http://localhost:63342",
 		},
 		AllowedHeaders: []string{
 			"Content-Type",

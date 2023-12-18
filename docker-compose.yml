@@ -12,25 +12,14 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - "5432:5432"
-  web:
-    build: ./
-    # command: ./wait-for-postgres.sh db ./stan-service
-    ports:
-      - 8000:8000
-    depends_on:
-      - db
-      - redis
-      - nats
-    environment:
-      - DB_PASSWORD=${DB_PASSWORD}
   redis:
     image: redis
     ports:
       - "8888:6379"
   nats:
-    image: nats-streaming:0.25.4
+    image: nats-streaming
     ports:
       - "4222:4222"
-      - "8222:8222"
       - "6222:6222"
+      # - "8222:8222"
     restart: always

@@ -30,10 +30,6 @@ type Redis struct {
 	MaxRetries int    `mapstructure:"REDIS_RETRIES"`
 }
 
-type FrontConfig struct {
-	Host string `mapstructure:"FRONT_HOST"`
-}
-
 func SetupSource() {
 	viper.SetConfigFile(".env")
 	viper.ReadInConfig()
@@ -44,7 +40,6 @@ type Config struct {
 	DbConfig     DbConfig
 	NATS         NATS
 	Redis        Redis
-	FrontConfig  FrontConfig
 }
 
 func NewConfig() *Config {

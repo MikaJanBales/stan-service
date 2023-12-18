@@ -64,7 +64,7 @@ func main() {
 		}
 	}()
 
-	cors := transport.CorsSettings(cfg.FrontConfig.Host)
+	cors := transport.CorsSettings()
 
 	server := &http.Server{
 		Addr:         cfg.ServerConfig.Host,
